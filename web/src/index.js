@@ -354,9 +354,13 @@ const Pack = ({ pack, send }) => html`
 	</section>
 `
 
+const gifIcon = html`
+<div class="top-left">GIF</div>
+`
 const Sticker = ({ content, send }) => html`
 	<div class="sticker" onClick=${send} data-sticker-id=${content.id}>
 		<img data-src=${makeThumbnailURL(content.url)} alt=${content.body} title=${content.body} />
+		${content.info["mimetype"] === "image/gif" ? gifIcon : ''}
 	</div>
 `
 
