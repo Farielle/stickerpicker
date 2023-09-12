@@ -263,10 +263,8 @@ class App extends Component {
 		this.sectionObserver.disconnect()
 	}
 
-	sendSticker(evt) {
-		const id = evt.currentTarget.getAttribute("data-sticker-id")
-		const sticker = this.stickersByID.get(id)
-		frequent.add(id)
+	sendSticker(sticker) {
+		frequent.add(sticker.id)
 		this.updateFrequentlyUsed()
 		widgetAPI.sendSticker(sticker)
 	}
@@ -368,7 +366,7 @@ const gifIcon = html`
 <div class="top-left">GIF</div>
 `
 const Sticker = ({ sticker, send }) => html`
-	<div class="sticker" onClick=${send} data-sticker-id=${sticker.id}>
+	<div class="sticker" onClick=${() => send(sticker)}>
 		<img data-src=${makeThumbnailURL(sticker)} alt=${sticker.body} title=${sticker.body} />
 		${sticker.info["mimetype"] === "image/gif" ? gifIcon : ''}
 	</div>
